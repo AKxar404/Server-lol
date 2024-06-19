@@ -13,7 +13,7 @@ class Program
         {
             // Establece el servidor para escuchar en el puerto 13000
             Int32 port = 13000;
-            IPAddress localAddr = IPAddress.Parse("127.0.0.1");
+            IPAddress localAddr = IPAddress.Parse("172.20.11.19");
             server = new TcpListener(localAddr, port);
 
             // Inicia el servidor
@@ -59,6 +59,7 @@ class Program
         NetworkStream stream = client.GetStream();
 
         int i;
+        
 
         // Loop para recibir todos los datos enviados por el cliente
         while ((i = stream.Read(bytes, 0, bytes.Length)) != 0)
@@ -66,9 +67,9 @@ class Program
             // Traduce los datos recibidos a una cadena de texto
             data = Encoding.ASCII.GetString(bytes, 0, i);
             Console.WriteLine("Recibido: {0}", data);
-
+            string message = Console.ReadLine();
             // Procesa los datos enviados por el cliente
-            string message = "SOY el SERVER lol";
+
             data = message;
 
             byte[] msg = Encoding.ASCII.GetBytes(data);
@@ -81,4 +82,6 @@ class Program
         // Cierra la conexión con el cliente
         client.Close();
     }
+
+
 }
